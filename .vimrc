@@ -43,7 +43,43 @@ set statusline+=%=      "left/right separator
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " Pathogen (used to install nerdtree etc.)
-call pathogen#infect()
+"call pathogen#infect()
+
+" Vundle (replaces Pathogen)
+filetype off
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+Bundle 'gmarik/vundle'
+
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'kien/ctrlp.vim.git'
+Bundle 'scrooloose/syntastic.git'
+Bundle 'scrooloose/nerdtree.git'
+Bundle 'altercation/vim-colors-solarized.git'
+Bundle 'Valloric/YouCompleteMe.git'
+
+" Syntastic
+" On by default, turn it off for html
+let g:syntastic_mode_map = { 'mode': 'active','active_filetypes': [],'passive_filetypes': ['html'] }
+
+filetype plugin indent on     " required!
+
+let g:syntastic_check_on_open=1
+let g:syntastic_enable_signs=1
+let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+" End Syntastic settings
+"Vundle Help
+ " Brief help
+ " :BundleList          - list configured bundles
+ " :BundleInstall(!)    - install(update) bundles
+ " :BundleSearch(!) foo - search(or refresh cache first) for foo
+ " :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
+ "
+ " see :h vundle for more details or wiki for FAQ
 
 " Solarized color theme for vim
 set bg=dark
